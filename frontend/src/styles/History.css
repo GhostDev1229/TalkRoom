@@ -1,0 +1,497 @@
+/* ==========================================
+   TALKROOM MEETING HISTORY
+========================================== */
+
+.historyPageContainer {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 7%;
+  background:
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(112, 75, 230, 0.15),
+      transparent 35%
+    ),
+    #080b18;
+  color: #ffffff;
+}
+
+.historyPageContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+/* NAVBAR */
+
+.historyNavbar {
+  position: relative;
+  z-index: 2;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.historyBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.historyBrand h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.historyBrandIcon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #a78bfa, #6544dc);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 850;
+  box-shadow: 0 7px 25px rgba(124, 92, 255, 0.3);
+}
+
+.historyHomeButton {
+  padding: 10px 17px !important;
+  border: 1px solid rgba(167, 139, 250, 0.25) !important;
+  border-radius: 10px !important;
+  background: rgba(124, 92, 255, 0.1) !important;
+  color: #e4ddff !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  text-transform: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.historyHomeButton:hover {
+  border-color: #a78bfa !important;
+  background: rgba(124, 92, 255, 0.23) !important;
+  transform: translateY(-2px);
+}
+
+/* MAIN CONTENT */
+
+.historyMainContent {
+  position: relative;
+  z-index: 1;
+  max-width: 1050px;
+  min-height: calc(100vh - 150px);
+  margin: 0 auto;
+  padding: 65px 0;
+  animation: historyFadeUp 0.7s ease both;
+}
+
+/* PAGE HEADING */
+
+.historyPageHeading {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 38px;
+}
+
+.historyHeadingIcon {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  border-radius: 18px;
+  background: rgba(124, 92, 255, 0.15);
+  color: #c4b5fd;
+}
+
+.historyHeadingIcon svg {
+  font-size: 32px;
+}
+
+.historyEyebrow {
+  display: block;
+  margin-bottom: 8px;
+  color: #a78bfa;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 1.8px;
+}
+
+.historyPageHeading h1 {
+  margin: 0 0 8px;
+  color: #ffffff;
+  font-size: clamp(29px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.historyPageHeading p {
+  margin: 0;
+  color: #9297b1;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* STATS */
+
+.historyStats {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(167, 139, 250, 0.17);
+  border-radius: 13px;
+  background: rgba(25, 29, 53, 0.8);
+}
+
+.historyStatIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(124, 92, 255, 0.16);
+  color: #c4b5fd;
+}
+
+.historyStatIcon svg {
+  font-size: 21px;
+}
+
+.historyStats span {
+  display: block;
+  margin-bottom: 3px;
+  color: #9297b1;
+  font-size: 11px;
+}
+
+.historyStats strong {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* MEETING LIST */
+
+.historyMeetingList {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.historyMeetingCard {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 15px !important;
+  background: linear-gradient(
+    120deg,
+    rgba(25, 29, 53, 0.95),
+    rgba(16, 20, 39, 0.95)
+  ) !important;
+  color: #ffffff !important;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease !important;
+}
+
+.historyMeetingCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(167, 139, 250, 0.4) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2) !important;
+}
+
+.historyCardContent {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 21px 24px !important;
+}
+
+.historyCardContent:last-child {
+  padding-bottom: 21px !important;
+}
+
+.historyCardIcon {
+  display: grid;
+  place-items: center;
+  width: 53px;
+  height: 53px;
+  flex-shrink: 0;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 14px;
+  background: rgba(124, 92, 255, 0.14);
+  color: #c4b5fd;
+}
+
+.historyCardIcon svg {
+  font-size: 25px;
+}
+
+.historyMeetingDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.historyMeetingLabel {
+  display: block;
+  margin-bottom: 6px;
+  color: #a78bfa;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 1.4px;
+}
+
+.historyMeetingCode {
+  overflow: hidden;
+  margin: 0 0 9px !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.historyMeetingDate {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #9297b1;
+  font-size: 12px;
+}
+
+.historyMeetingDate svg {
+  font-size: 15px;
+  color: #a78bfa;
+}
+
+.historyMeetingAction {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(167, 139, 250, 0.2) !important;
+  background: rgba(124, 92, 255, 0.12) !important;
+  color: #c4b5fd !important;
+  transition: all 0.3s ease !important;
+}
+
+.historyMeetingAction:hover {
+  transform: translateX(4px);
+  background: rgba(124, 92, 255, 0.3) !important;
+}
+
+.historyMeetingAction.Mui-disabled {
+  opacity: 0.3;
+}
+
+/* EMPTY / LOADING / ERROR */
+
+.historyStateCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 35px;
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  border-radius: 17px;
+  background: rgba(19, 23, 41, 0.8);
+  text-align: center;
+}
+
+.historyEmptyIcon {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  background: rgba(124, 92, 255, 0.15);
+  color: #c4b5fd;
+}
+
+.historyEmptyIcon svg {
+  font-size: 35px;
+}
+
+.historyStateCard h3 {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.historyStateCard p {
+  max-width: 400px;
+  margin: 0;
+  color: #9297b1;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.historyRetryButton {
+  margin-top: 22px !important;
+  padding: 11px 20px !important;
+  border-radius: 9px !important;
+  background: linear-gradient(110deg, #7955e9, #6042cf) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-transform: none !important;
+}
+
+.historyRetryButton:hover {
+  background: linear-gradient(110deg, #8b69f5, #7154e5) !important;
+}
+
+.historyErrorCard p {
+  color: #fca5a5;
+}
+
+/* LOADER */
+
+.historyLoader {
+  width: 38px;
+  height: 38px;
+  margin-bottom: 22px;
+  border: 3px solid rgba(167, 139, 250, 0.15);
+  border-top-color: #a78bfa;
+  border-radius: 50%;
+  animation: historySpin 0.8s linear infinite;
+}
+
+/* FOOTER */
+
+.historyFooter {
+  position: relative;
+  z-index: 2;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: #747b98;
+  font-size: 11px;
+}
+
+/* ANIMATIONS */
+
+@keyframes historyFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes historySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+  .historyPageContainer {
+    padding: 0 22px;
+  }
+
+  .historyMainContent {
+    padding: 45px 0;
+  }
+
+  .historyPageHeading {
+    gap: 15px;
+  }
+
+  .historyHeadingIcon {
+    width: 55px;
+    height: 55px;
+  }
+
+  .historyPageHeading h1 {
+    font-size: 29px;
+  }
+
+  .historyPageHeading p {
+    font-size: 12px;
+  }
+
+  .historyCardContent {
+    gap: 13px;
+    padding: 17px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .historyPageContainer {
+    padding: 0 15px;
+  }
+
+  .historyBrand h2 {
+    font-size: 21px;
+  }
+
+  .historyBrandIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .historyHomeButton {
+    padding: 8px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .historyMeetingCode {
+    font-size: 13px !important;
+  }
+
+  .historyMeetingDate {
+    font-size: 10px;
+  }
+
+  .historyCardIcon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .historyMeetingAction {
+    width: 35px;
+    height: 35px;
+  }
+
+  .historyFooter {
+    font-size: 9px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media (prefers-reduced-motion: reduce) {
+  .historyPageContainer *,
+  .historyPageContainer *::before,
+  .historyPageContainer *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

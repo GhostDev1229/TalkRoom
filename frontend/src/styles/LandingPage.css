@@ -1,0 +1,564 @@
+/* ==========================================
+   TALKROOM LANDING PAGE
+========================================== */
+
+.landingPageContainer {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 7%;
+  color: #ffffff;
+  background:
+    radial-gradient(
+      circle at 75% 45%,
+      rgba(112, 75, 230, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(circle at 5% 95%, rgba(0, 190, 255, 0.1), transparent 30%),
+    #080b18;
+}
+
+/* BACKGROUND GRID */
+
+.landingPageContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+/* NAVBAR */
+
+.landingNavbar {
+  position: relative;
+  z-index: 5;
+  min-height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.navHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navHeader h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.landingBrandIcon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #a78bfa, #6544dc);
+  color: white;
+  font-size: 22px;
+  font-weight: 850;
+  box-shadow: 0 7px 25px rgba(124, 92, 255, 0.3);
+}
+
+.navlist {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.navTextButton,
+.navLoginButton {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  transition: all 0.3s ease;
+}
+
+.navTextButton {
+  padding: 10px 0;
+  background: transparent;
+  color: #aeb2c9;
+}
+
+.navTextButton:hover {
+  color: #ffffff;
+}
+
+.navLoginButton {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 22px;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  border-radius: 10px;
+  background: rgba(124, 92, 255, 0.13);
+  color: #ffffff;
+}
+
+.navLoginButton span {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.navLoginButton:hover {
+  border-color: #a78bfa;
+  background: rgba(124, 92, 255, 0.25);
+}
+
+.navLoginButton:hover span {
+  transform: translateX(4px);
+}
+
+/* HERO SECTION */
+
+.landingMainContainer {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 145px);
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 35px;
+  padding: 45px 0 65px;
+}
+
+.landingHeroContent {
+  max-width: 650px;
+  animation: landingFadeUp 0.9s ease both;
+}
+
+.landingEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  margin-bottom: 27px;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 30px;
+  background: rgba(124, 92, 255, 0.12);
+  color: #c4b5fd;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.5px;
+}
+
+.landingStatusDot,
+.badgeLiveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6ee7b7;
+  box-shadow: 0 0 12px #6ee7b7;
+  animation: landingPulse 1.8s infinite;
+}
+
+.landingHeroContent h1 {
+  margin: 0 0 25px;
+  color: #ffffff;
+  font-size: clamp(44px, 5.5vw, 76px);
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -3.5px;
+}
+
+.landingHeroContent h1 span {
+  background: linear-gradient(90deg, #c4b5fd, #a78bfa, #67e8f9);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landingHeroContent > p {
+  max-width: 510px;
+  margin: 0;
+  color: #aeb2c9;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* HERO ACTIONS */
+
+.landingActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 35px;
+}
+
+.landingPrimaryButton,
+.landingSecondaryButton {
+  min-height: 53px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 25px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.landingPrimaryButton {
+  border: none;
+  background: linear-gradient(110deg, #7955e9, #6042cf);
+  color: #ffffff;
+  box-shadow: 0 9px 28px rgba(105, 73, 218, 0.3);
+}
+
+.landingPrimaryButton span {
+  font-size: 19px;
+  transition: transform 0.3s ease;
+}
+
+.landingPrimaryButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(105, 73, 218, 0.45);
+}
+
+.landingPrimaryButton:hover span {
+  transform: translateX(5px);
+}
+
+.landingSecondaryButton {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e4e4f0;
+}
+
+.landingSecondaryButton:hover {
+  border-color: #a78bfa;
+  background: rgba(124, 92, 255, 0.12);
+  transform: translateY(-3px);
+}
+
+/* HIGHLIGHTS */
+
+.landingHighlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 45px;
+}
+
+.landingHighlights > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #aeb2c9;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.highlightIcon {
+  color: #a78bfa;
+  font-size: 17px;
+}
+
+/* HERO VISUAL */
+
+.landingHeroVisual {
+  position: relative;
+  min-height: 570px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: landingVisualEnter 1.1s ease both;
+}
+
+.landingVisualGlow {
+  position: absolute;
+  width: 390px;
+  height: 390px;
+  border-radius: 50%;
+  background: rgba(124, 92, 255, 0.25);
+  filter: blur(90px);
+  animation: landingGlow 7s ease-in-out infinite alternate;
+}
+
+.landingVisualCard {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 480px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: landingFloat 5s ease-in-out infinite;
+}
+
+.landingVisualCard img {
+  display: block;
+  width: 100%;
+  max-height: 570px;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.4));
+}
+
+/* FLOATING BADGES */
+
+.landingFloatingBadge {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+  background: rgba(22, 25, 48, 0.85);
+  color: #e9e8f5;
+  font-size: 12px;
+  font-weight: 650;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.landingBadgeTop {
+  top: 17%;
+  right: 0;
+  animation: landingBadgeFloat 4s ease-in-out infinite;
+}
+
+.landingBadgeBottom {
+  bottom: 17%;
+  left: 0;
+  animation: landingBadgeFloat 4.5s ease-in-out infinite reverse;
+}
+
+.landingBadgeBottom > span {
+  color: #c4b5fd;
+  font-size: 17px;
+}
+
+/* FOOTER */
+
+.landingBottomLine {
+  position: relative;
+  z-index: 2;
+  min-height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: #747b98;
+  font-size: 11px;
+}
+
+/* ANIMATIONS */
+
+@keyframes landingFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes landingVisualEnter {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes landingFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes landingBadgeFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes landingGlow {
+  from {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+}
+
+@keyframes landingPulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 5px #6ee7b7;
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 15px #6ee7b7;
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+  .landingPageContainer {
+    padding: 0 5%;
+  }
+
+  .landingHeroContent h1 {
+    font-size: 56px;
+  }
+
+  .landingHeroVisual {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 760px) {
+  .landingNavbar {
+    min-height: 80px;
+  }
+
+  .navlist {
+    gap: 15px;
+  }
+
+  .landingMainContainer {
+    grid-template-columns: 1fr;
+    padding-top: 65px;
+  }
+
+  .landingHeroContent {
+    max-width: 600px;
+  }
+
+  .landingHeroContent h1 {
+    font-size: clamp(43px, 9vw, 62px);
+  }
+
+  .landingHeroVisual {
+    min-height: 430px;
+  }
+
+  .landingVisualCard {
+    width: min(85%, 390px);
+  }
+
+  .landingBadgeTop {
+    right: 3%;
+  }
+
+  .landingBadgeBottom {
+    left: 3%;
+  }
+}
+
+@media (max-width: 520px) {
+  .landingPageContainer {
+    padding: 0 22px;
+  }
+
+  .navHeader h2 {
+    font-size: 21px;
+  }
+
+  .landingBrandIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .navlist {
+    gap: 12px;
+  }
+
+  .navTextButton {
+    font-size: 12px;
+  }
+
+  .navLoginButton {
+    padding: 10px 13px;
+    font-size: 12px;
+  }
+
+  .landingMainContainer {
+    padding-top: 55px;
+    gap: 10px;
+  }
+
+  .landingHeroContent h1 {
+    font-size: 43px;
+    letter-spacing: -2px;
+  }
+
+  .landingHeroContent > p {
+    font-size: 14px;
+  }
+
+  .landingEyebrow {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+
+  .landingHighlights {
+    gap: 13px;
+    margin-top: 30px;
+  }
+
+  .landingHighlights > div {
+    font-size: 10px;
+  }
+
+  .landingHeroVisual {
+    min-height: 350px;
+  }
+
+  .landingFloatingBadge {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  .landingBottomLine {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landingPageContainer *,
+  .landingPageContainer *::before,
+  .landingPageContainer *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,1850 @@
+/* =========================================================
+   TALKROOM — PREMIUM VIDEO MEETING EXPERIENCE
+   Theme: Midnight Navy / Electric Violet / Cyan
+   Animations: Glow, Float, Reveal, Pulse, Hover, Shimmer
+========================================================= */
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.appShell {
+  min-height: 100vh;
+  width: 100%;
+  color: #f8f7ff;
+  background: #080916;
+  font-family: Inter, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* =========================================================
+   ANIMATION SYSTEM
+========================================================= */
+
+@keyframes lobbyEnter {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes previewEnter {
+  from {
+    opacity: 0;
+    transform: translateX(45px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes floatNote {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+@keyframes tileEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chatEnter {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes messageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(72, 223, 172, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(72, 223, 172, 0);
+  }
+}
+
+@keyframes borderGlow {
+  0%,
+  100% {
+    border-color: rgba(146, 112, 255, 0.2);
+  }
+  50% {
+    border-color: rgba(146, 112, 255, 0.65);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes controlFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes avatarPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(133, 94, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 38px rgba(133, 94, 255, 0.55);
+  }
+}
+
+@keyframes chatDot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  40% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   SHARED BRAND
+========================================================= */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+}
+
+.brandMark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #986cff, #5635d9);
+  box-shadow: 0 5px 24px rgba(124, 77, 255, 0.4);
+  transition: 0.3s ease;
+}
+
+.brandMark:hover {
+  transform: rotate(-10deg) scale(1.1);
+  box-shadow: 0 0 30px rgba(124, 77, 255, 0.7);
+}
+
+.brandMark svg {
+  font-size: 23px;
+}
+
+/* =========================================================
+   PRE-JOIN LOBBY
+========================================================= */
+
+.lobbyPage {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0 7%;
+  background:
+    radial-gradient(
+      ellipse at 75% 45%,
+      rgba(105, 67, 255, 0.2),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 15% 85%,
+      rgba(29, 145, 207, 0.13),
+      transparent 35%
+    ),
+    #080916;
+}
+
+.lobbyPage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image: radial-gradient(
+    rgba(174, 158, 255, 0.5) 0.7px,
+    transparent 0.7px
+  );
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  animation: gradientMove 15s ease infinite;
+}
+
+.lobbyPage::after {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  right: -220px;
+  top: -200px;
+  border-radius: 50%;
+  background: rgba(114, 76, 255, 0.1);
+  filter: blur(100px);
+  pointer-events: none;
+  animation: glowPulse 8s ease-in-out infinite;
+}
+
+.lobbyTopbar {
+  position: relative;
+  z-index: 2;
+  height: 88px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.backButton {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  color: #b8b6cb;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  color: #fff;
+  border-color: #9878ff;
+  background: rgba(132, 91, 255, 0.16);
+  transform: translateX(-4px);
+  box-shadow: 0 0 20px rgba(132, 91, 255, 0.15);
+}
+
+.backButton svg {
+  font-size: 18px;
+}
+
+.backButton span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.secureLabel {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #a9a5bd;
+  font-size: 12px;
+}
+
+.secureLabel svg {
+  color: #a18aff;
+  font-size: 16px;
+}
+
+.lobbyContent {
+  position: relative;
+  z-index: 1;
+  max-width: 1250px;
+  min-height: calc(100vh - 88px);
+  margin: auto;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 9%;
+  padding: 65px 0 90px;
+}
+
+.lobbyInfo {
+  max-width: 490px;
+  animation: lobbyEnter 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 13px;
+  color: #d0c2ff;
+  background: rgba(126, 91, 255, 0.12);
+  border: 1px solid rgba(149, 117, 255, 0.25);
+  border-radius: 30px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  box-shadow: 0 0 20px rgba(126, 91, 255, 0.08);
+}
+
+.statusDot,
+.previewLiveDot,
+.meetingLiveDot,
+.nameStatusDot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #48dfac;
+  box-shadow: 0 0 12px rgba(72, 223, 172, 0.7);
+  animation: livePulse 2s infinite;
+}
+
+.lobbyInfo h1 {
+  margin: 27px 0 18px;
+  color: #fff;
+  font-size: clamp(43px, 5vw, 67px);
+  line-height: 1.07;
+  letter-spacing: -3.5px;
+  font-weight: 850;
+}
+
+.lobbyInfo h1 span {
+  display: block;
+  background: linear-gradient(100deg, #c1a7ff 5%, #8062ff 55%, #54d6f5);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientMove 5s ease infinite;
+}
+
+.lobbyDescription {
+  max-width: 420px;
+  margin: 0 0 30px;
+  color: #aaa7c0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.meetingCodeCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 19px;
+  margin-bottom: 26px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+  transition: 0.3s ease;
+}
+
+.meetingCodeCard:hover {
+  border-color: rgba(151, 116, 255, 0.55);
+  background: rgba(124, 90, 255, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.meetingCodeCard div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.mutedLabel {
+  color: #88839e;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.meetingCodeCard strong {
+  color: #e6dfff;
+  font-size: 17px;
+  letter-spacing: 1px;
+  word-break: break-word;
+}
+
+.meetingCodeCard > svg {
+  color: #a58aff;
+  font-size: 21px;
+}
+
+.nameField {
+  margin-bottom: 17px;
+}
+
+.nameField label {
+  display: block;
+  margin-bottom: 10px;
+  color: #d9d6e9;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nameField .MuiOutlinedInput-root {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 11px;
+  transition: 0.25s ease;
+}
+
+.nameField .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.nameField .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(156, 124, 255, 0.7);
+}
+
+.nameField .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 4px rgba(151, 116, 255, 0.1);
+}
+
+.nameField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #9874ff;
+}
+
+.nameField input {
+  padding: 14px;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  font-size: 14px;
+}
+
+.nameField input::placeholder {
+  color: #89849f;
+  opacity: 1;
+  -webkit-text-fill-color: #89849f;
+}
+
+.joinButton.MuiButton-root {
+  min-height: 51px;
+  gap: 10px;
+  color: #fff;
+  background: linear-gradient(105deg, #895fff, #6243db, #4c55ce);
+  background-size: 200% auto;
+  border-radius: 11px;
+  box-shadow: 0 9px 28px rgba(111, 73, 237, 0.3);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: none;
+  transition: all 0.3s ease;
+  animation: gradientMove 6s ease infinite;
+}
+
+.joinButton.MuiButton-root:hover {
+  background-position: right center;
+  box-shadow: 0 12px 35px rgba(111, 73, 237, 0.5);
+  transform: translateY(-3px);
+}
+
+.joinButton.MuiButton-root:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.joinButton.MuiButton-root:disabled {
+  color: #d0c7ed;
+  background: #51437c;
+}
+
+.joinButton svg {
+  font-size: 20px;
+  transition: transform 0.25s ease;
+}
+
+.joinButton:hover svg {
+  transform: translateX(5px);
+}
+
+.lobbyError {
+  margin: 13px 0 0;
+  padding: 11px 13px;
+  color: #ffaaa9;
+  background: rgba(207, 56, 70, 0.12);
+  border: 1px solid rgba(255, 101, 110, 0.25);
+  border-radius: 9px;
+  font-size: 12px;
+  line-height: 1.5;
+  animation: messageEnter 0.3s ease both;
+}
+
+.privacyNote {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+  color: #858099;
+  font-size: 11px;
+}
+
+.privacyNote svg {
+  font-size: 14px;
+  color: #9b83ef;
+}
+
+/* =========================================================
+   LOBBY VIDEO PREVIEW
+========================================================= */
+
+.previewArea {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  animation: previewEnter 1s 0.1s ease both;
+}
+
+.previewGlow {
+  position: absolute;
+  width: 75%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(117, 76, 255, 0.24);
+  filter: blur(90px);
+  animation: glowPulse 5s ease-in-out infinite alternate;
+}
+
+.previewCard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 610px;
+  padding: 13px;
+  background: rgba(22, 22, 42, 0.88);
+  border: 1px solid rgba(172, 149, 255, 0.2);
+  border-radius: 21px;
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.45),
+    0 0 55px rgba(115, 78, 255, 0.1);
+  backdrop-filter: blur(20px);
+  transition: 0.4s ease;
+}
+
+.previewCard:hover {
+  transform: translateY(-7px);
+  border-color: rgba(172, 149, 255, 0.48);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.5),
+    0 0 45px rgba(115, 78, 255, 0.2);
+}
+
+.previewHeader,
+.previewHeader > div,
+.previewFooter,
+.previewFooter span {
+  display: flex;
+  align-items: center;
+}
+
+.previewHeader {
+  justify-content: space-between;
+  padding: 8px 8px 14px;
+  color: #d4d0e6;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.previewHeader > div {
+  gap: 9px;
+}
+
+.previewTag {
+  padding: 5px 9px;
+  color: #c5b5ff;
+  background: rgba(129, 94, 255, 0.17);
+  border-radius: 5px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.previewVideoWrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: radial-gradient(circle at 50% 35%, #30285c, #111323 70%);
+  border-radius: 13px;
+}
+
+.previewVideoWrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.previewPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #a49dc2;
+  font-size: 12px;
+}
+
+.previewPlaceholder svg {
+  font-size: 43px;
+  color: #a18aff;
+  filter: drop-shadow(0 0 15px rgba(146, 112, 255, 0.5));
+}
+
+.previewFooter {
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px 8px 5px;
+  color: #aaa4bd;
+  font-size: 10px;
+}
+
+.previewFooter span {
+  gap: 7px;
+}
+
+.previewFooter svg {
+  color: #a58aff;
+  font-size: 16px;
+}
+
+.floatingNote {
+  position: absolute;
+  z-index: 2;
+  right: -28px;
+  bottom: -34px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 19px;
+  background: rgba(31, 29, 58, 0.97);
+  border: 1px solid rgba(166, 139, 255, 0.3);
+  border-radius: 13px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  animation: floatNote 4s ease-in-out infinite;
+}
+
+.floatingNote > svg {
+  color: #b29aff;
+  font-size: 25px;
+}
+
+.floatingNote div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.floatingNote strong {
+  color: #fff;
+  font-size: 12px;
+}
+
+.floatingNote span {
+  color: #aaa3c3;
+  font-size: 10px;
+}
+
+/* =========================================================
+   MEETING ROOM
+========================================================= */
+
+.meetVideoContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(95, 65, 190, 0.17),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(42, 111, 170, 0.08),
+      transparent 40%
+    ),
+    #080916;
+}
+
+.meetingHeader {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 0 30px;
+  background: rgba(12, 12, 29, 0.94);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  z-index: 3;
+}
+
+.meetingHeader .brand {
+  font-size: 19px;
+}
+
+.meetingHeader .brandMark {
+  width: 34px;
+  height: 34px;
+}
+
+.meetingDetails {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #c4c0d7;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.meetingLiveDot {
+  width: 7px;
+  height: 7px;
+}
+
+.meetingDivider {
+  width: 1px;
+  height: 16px;
+  margin: 0 5px;
+  background: rgba(255, 255, 255, 0.17);
+}
+
+.meetingCodeText {
+  color: #9690ac;
+  letter-spacing: 0.5px;
+}
+
+.participantCount {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d0cbe0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.participantCount svg {
+  color: #a28aff;
+  font-size: 19px;
+}
+
+.participantText {
+  color: #9993ad;
+  font-weight: 500;
+}
+
+.meetingWorkspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  padding: 24px 27px;
+  gap: 20px;
+}
+
+.videoStage {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.stageHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.stageHeading h2 {
+  margin: 0 0 5px;
+  color: #f7f5ff;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.stageHeading p {
+  margin: 0;
+  color: #9690a9;
+  font-size: 11px;
+}
+
+.stageParticipantCount {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  color: #cbbfff;
+  background: rgba(127, 91, 255, 0.12);
+  border: 1px solid rgba(144, 112, 255, 0.2);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.stageParticipantCount svg {
+  font-size: 16px;
+}
+
+/* =========================================================
+   PARTICIPANT VIDEO GRID
+========================================================= */
+
+.conferenceView {
+  display: grid;
+  flex: 1;
+  min-height: 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  grid-auto-rows: minmax(180px, 1fr);
+  align-content: center;
+  gap: 15px;
+  overflow-y: auto;
+  padding: 2px 2px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #6550a3 transparent;
+}
+
+.singleParticipant {
+  grid-template-columns: minmax(0, 850px);
+  justify-content: center;
+  align-content: center;
+}
+
+.videoTile {
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 180px;
+  background: radial-gradient(circle at 50% 40%, #29244b, #121426 75%);
+  border: 1px solid rgba(163, 140, 255, 0.2);
+  border-radius: 17px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  animation: tileEnter 0.5s ease both;
+  transition:
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.videoTile:hover {
+  z-index: 1;
+  border-color: rgba(161, 132, 255, 0.65);
+  box-shadow: 0 15px 38px rgba(91, 61, 180, 0.25);
+  transform: translateY(-3px);
+}
+
+.videoTile video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  background: #141529;
+}
+
+.meetUserVideo {
+  transform: scaleX(-1);
+}
+
+.remoteVideo {
+  transform: none;
+}
+
+.videoNameTag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 24px);
+  padding: 8px 11px;
+  overflow: hidden;
+  color: #fff;
+  background: rgba(9, 10, 24, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nameStatusDot {
+  width: 6px;
+  height: 6px;
+}
+
+.videoOffOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  color: #c8c0e2;
+  background: linear-gradient(145deg, #201d3d, #111323);
+  font-size: 12px;
+}
+
+.avatarCircle {
+  width: 78px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: linear-gradient(135deg, #a17aff, #4f39ba);
+  border: 4px solid rgba(255, 255, 255, 0.13);
+  border-radius: 50%;
+  box-shadow: 0 0 35px rgba(133, 94, 255, 0.3);
+  font-size: 30px;
+  font-weight: 800;
+  animation: avatarPulse 3s ease-in-out infinite;
+}
+
+.sharingTag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  color: #c7f7e4;
+  background: rgba(15, 111, 79, 0.85);
+  border: 1px solid rgba(91, 233, 174, 0.3);
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  box-shadow: 0 0 16px rgba(72, 223, 172, 0.12);
+}
+
+.sharingTag svg {
+  font-size: 15px;
+}
+
+/* =========================================================
+   MEETING CONTROLS — CLEAR ON/OFF STATES
+========================================================= */
+
+.meetingControls {
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 15px 22px;
+  margin: 15px auto 0;
+  background: rgba(24, 23, 45, 0.97);
+  border: 1px solid rgba(164, 142, 255, 0.25);
+  border-radius: 18px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(123, 87, 255, 0.1);
+  backdrop-filter: blur(18px);
+  animation: lobbyEnter 0.45s ease both;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+
+.controlItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: #c2bdd5;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Normal ON button */
+
+.controlButton.MuiIconButton-root {
+  width: 48px;
+  height: 48px;
+  color: #fff !important;
+  background: linear-gradient(145deg, #39325e, #292443) !important;
+  border: 1px solid rgba(171, 151, 255, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.controlButton.MuiIconButton-root svg {
+  font-size: 22px;
+}
+
+.controlButton.MuiIconButton-root:hover {
+  color: #fff !important;
+  background: linear-gradient(145deg, #7658d9, #563bb4) !important;
+  border-color: #c0aaff;
+  box-shadow: 0 0 22px rgba(144, 108, 255, 0.4);
+  transform: translateY(-4px) scale(1.05);
+}
+
+.controlButton.MuiIconButton-root:active {
+  transform: scale(0.94);
+}
+
+/* MIC OFF / CAMERA OFF — RED */
+
+.controlDisabled.MuiIconButton-root {
+  color: #fff !important;
+  background: linear-gradient(145deg, #f04f68, #bd2948) !important;
+  border: 1px solid rgba(255, 151, 164, 0.75) !important;
+  box-shadow: 0 0 18px rgba(233, 75, 100, 0.3);
+}
+
+.controlDisabled.MuiIconButton-root:hover {
+  color: #fff !important;
+  background: linear-gradient(145deg, #ff637a, #d93656) !important;
+  box-shadow: 0 0 27px rgba(233, 75, 100, 0.5);
+}
+
+/* ACTIVE SCREEN SHARE / CHAT */
+
+.controlActive.MuiIconButton-root {
+  color: #fff !important;
+  background: linear-gradient(135deg, #8159ed, #6242d0) !important;
+  border: 1px solid rgba(190, 167, 255, 0.7) !important;
+  box-shadow: 0 0 20px rgba(117, 78, 235, 0.4);
+}
+
+.controlActive.MuiIconButton-root:hover {
+  background: linear-gradient(135deg, #a17dff, #7555e8) !important;
+  box-shadow: 0 0 27px rgba(117, 78, 235, 0.55);
+}
+
+.controlSeparator {
+  width: 1px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.17);
+}
+
+/* END CALL */
+
+.endCallButton.MuiIconButton-root {
+  width: 53px;
+  height: 48px;
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff536b, #c92043) !important;
+  border: 1px solid rgba(255, 155, 169, 0.45);
+  border-radius: 13px;
+  box-shadow: 0 5px 20px rgba(217, 58, 86, 0.35);
+  transition: all 0.25s ease;
+}
+
+.endCallButton.MuiIconButton-root:hover {
+  color: #fff !important;
+  background: linear-gradient(135deg, #ff7488, #e22e53) !important;
+  box-shadow: 0 8px 30px rgba(217, 58, 86, 0.55);
+  transform: translateY(-3px) scale(1.06);
+}
+
+.endCallButton.MuiIconButton-root:active {
+  transform: scale(0.94);
+}
+
+.endCallButton svg {
+  font-size: 23px;
+}
+
+/* =========================================================
+   CHAT SIDEBAR
+========================================================= */
+
+.chatRoom {
+  flex: 0 0 340px;
+  width: 340px;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 90% 0%,
+      rgba(120, 81, 255, 0.17),
+      transparent 45%
+    ),
+    #141329;
+  border: 1px solid rgba(163, 137, 255, 0.23);
+  border-radius: 16px;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.3);
+  animation: chatEnter 0.35s ease both;
+}
+
+.chatHeader {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 17px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.chatTitle {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.chatIcon {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  color: #d0c1ff;
+  background: rgba(130, 94, 255, 0.19);
+  border: 1px solid rgba(156, 128, 255, 0.25);
+  border-radius: 11px;
+  transition: 0.3s ease;
+}
+
+.chatIcon:hover {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 0 18px rgba(130, 94, 255, 0.3);
+}
+
+.chatIcon svg {
+  font-size: 19px;
+}
+
+.chatTitle h2 {
+  margin: 0 0 4px;
+  color: #f7f5ff;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.chatTitle span {
+  color: #a19ab8;
+  font-size: 10px;
+}
+
+.closeChatButton.MuiIconButton-root {
+  width: 30px;
+  height: 30px;
+  color: #b7b0cb;
+  background: rgba(255, 255, 255, 0.06);
+  transition: 0.25s ease;
+}
+
+.closeChatButton.MuiIconButton-root:hover {
+  color: #fff;
+  background: rgba(255, 77, 104, 0.25);
+  transform: rotate(90deg);
+}
+
+.closeChatButton span {
+  font-size: 23px;
+  line-height: 1;
+}
+
+.chattingDisplay {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  overflow-y: auto;
+  padding: 18px 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #6550a3 transparent;
+}
+
+.chattingDisplay::-webkit-scrollbar,
+.conferenceView::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chattingDisplay::-webkit-scrollbar-thumb,
+.conferenceView::-webkit-scrollbar-thumb {
+  background: #6550a3;
+  border-radius: 10px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  max-width: 88%;
+  animation: messageEnter 0.3s ease both;
+}
+
+.messageSender {
+  padding-left: 4px;
+  color: #b9a9ed;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.messageBubble {
+  padding: 10px 13px;
+  color: #f2efff;
+  background: linear-gradient(
+    135deg,
+    rgba(105, 83, 170, 0.3),
+    rgba(76, 65, 125, 0.3)
+  );
+  border: 1px solid rgba(162, 137, 255, 0.17);
+  border-radius: 4px 13px 13px 13px;
+  overflow-wrap: anywhere;
+  transition: 0.2s ease;
+}
+
+.messageBubble:hover {
+  border-color: rgba(162, 137, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.messageBubble p {
+  margin: 0;
+  color: #f2efff;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ownMessage {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.ownMessage .messageSender {
+  padding-right: 4px;
+  color: #c1aaff;
+}
+
+.ownMessage .messageBubble {
+  color: #fff;
+  background: linear-gradient(135deg, #7856df, #563db2);
+  border-color: rgba(190, 166, 255, 0.3);
+  border-radius: 13px 4px 13px 13px;
+}
+
+.ownMessage .messageBubble p {
+  color: #fff;
+}
+
+.emptyChat {
+  flex: 1;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.emptyChatIcon {
+  width: 53px;
+  height: 53px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  color: #b59cff;
+  background: rgba(135, 99, 255, 0.16);
+  border: 1px solid rgba(161, 133, 255, 0.22);
+  border-radius: 17px;
+  animation: floatNote 4s ease-in-out infinite;
+}
+
+.emptyChatIcon svg {
+  font-size: 24px;
+}
+
+.emptyChat h3 {
+  margin: 0 0 7px;
+  color: #eeeaff;
+  font-size: 13px;
+}
+
+.emptyChat p {
+  max-width: 210px;
+  margin: 0;
+  color: #a09ab6;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   CHAT INPUT — HIGH VISIBILITY
+========================================================= */
+
+.chattingArea {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px;
+  background: rgba(8, 8, 21, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chattingArea .MuiTextField-root {
+  width: 100%;
+}
+
+.chattingArea .MuiInputBase-root {
+  color: #fff !important;
+  background: #211d3b !important;
+  caret-color: #b69aff !important;
+  border-radius: 10px;
+}
+
+.chattingArea .MuiInputBase-input,
+.chattingArea .MuiOutlinedInput-input {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #b69aff !important;
+  opacity: 1 !important;
+  background: transparent !important;
+  font-size: 12px;
+}
+
+.chattingArea .MuiInputBase-input::placeholder,
+.chattingArea .MuiOutlinedInput-input::placeholder {
+  color: #c2b9dc !important;
+  -webkit-text-fill-color: #c2b9dc !important;
+  opacity: 1 !important;
+}
+
+.chattingArea .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(166, 139, 255, 0.4) !important;
+  transition: 0.25s ease;
+}
+
+.chattingArea .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #9878ff !important;
+}
+
+.chattingArea .MuiOutlinedInput-root.Mui-focused {
+  box-shadow: 0 0 0 3px rgba(151, 116, 255, 0.12);
+}
+
+.chattingArea
+  .MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #a58aff !important;
+  border-width: 2px !important;
+}
+
+.chattingArea input {
+  padding: 11px 12px;
+}
+
+.chattingArea .MuiButton-root {
+  min-width: 43px;
+  width: 43px;
+  height: 40px;
+  color: #fff;
+  background: linear-gradient(135deg, #865df2, #6142d3);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(111, 73, 237, 0.25);
+  transition: 0.25s ease;
+}
+
+.chattingArea .MuiButton-root:hover {
+  background: linear-gradient(135deg, #a17aff, #7554e8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(111, 73, 237, 0.4);
+}
+
+.chattingArea .MuiButton-root:active {
+  transform: scale(0.94);
+}
+
+.chattingArea .MuiButton-root:disabled {
+  color: #aaa1c1;
+  background: rgba(120, 105, 163, 0.25);
+  box-shadow: none;
+}
+
+.chattingArea .MuiButton-root svg {
+  font-size: 18px;
+}
+
+.chatFooter {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0 12px 12px;
+  color: #9690a8;
+  background: rgba(8, 8, 21, 0.75);
+  text-align: center;
+  font-size: 9px;
+}
+
+/* =========================================================
+   MEETING ERROR
+========================================================= */
+
+.meetingError {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  margin-top: 8px;
+  color: #ffc1c6;
+  background: rgba(180, 46, 66, 0.19);
+  border: 1px solid rgba(255, 103, 123, 0.28);
+  border-radius: 9px;
+  font-size: 11px;
+  animation: messageEnter 0.3s ease both;
+}
+
+.meetingError button {
+  flex-shrink: 0;
+  padding: 5px 9px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 10px;
+  transition: 0.2s ease;
+}
+
+.meetingError button:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .lobbyPage {
+    padding: 0 5%;
+  }
+
+  .lobbyContent {
+    gap: 5%;
+  }
+
+  .lobbyInfo h1 {
+    font-size: 52px;
+  }
+
+  .floatingNote {
+    right: -10px;
+  }
+
+  .meetingWorkspace {
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .chatRoom {
+    flex-basis: 310px;
+    width: 310px;
+  }
+
+  .conferenceView {
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE AND SMALL TABLETS
+========================================================= */
+
+@media (max-width: 760px) {
+  .lobbyPage {
+    padding: 0 20px;
+  }
+
+  .lobbyTopbar {
+    height: 72px;
+    grid-template-columns: 1fr auto;
+  }
+
+  .lobbyTopbar .brand {
+    justify-self: end;
+    font-size: 18px;
+  }
+
+  .secureLabel {
+    display: none;
+  }
+
+  .backButton {
+    padding: 8px;
+  }
+
+  .backButton span {
+    display: none;
+  }
+
+  .lobbyContent {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 55px 0 75px;
+  }
+
+  .lobbyInfo {
+    max-width: 100%;
+  }
+
+  .lobbyInfo h1 {
+    max-width: 480px;
+    font-size: clamp(43px, 11vw, 59px);
+    letter-spacing: -2.5px;
+  }
+
+  .lobbyDescription {
+    font-size: 13px;
+  }
+
+  .previewArea {
+    width: 100%;
+    max-width: 560px;
+    margin: auto;
+  }
+
+  .floatingNote {
+    right: -4px;
+    bottom: -28px;
+    padding: 11px 13px;
+  }
+
+  .meetVideoContainer {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  .meetingHeader {
+    min-height: 62px;
+    padding: 0 15px;
+  }
+
+  .meetingHeader .brand {
+    font-size: 17px;
+  }
+
+  .meetingHeader .brandMark {
+    width: 31px;
+    height: 31px;
+  }
+
+  .meetingDetails {
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .meetingCodeText,
+  .meetingDivider {
+    display: none;
+  }
+
+  .participantCount {
+    gap: 5px;
+    font-size: 11px;
+  }
+
+  .participantText {
+    display: none;
+  }
+
+  .meetingWorkspace {
+    position: relative;
+    flex-direction: column;
+    padding: 14px 12px;
+    gap: 12px;
+  }
+
+  .videoStage {
+    flex: 1;
+  }
+
+  .stageHeading {
+    margin-bottom: 12px;
+  }
+
+  .stageHeading h2 {
+    font-size: 15px;
+  }
+
+  .stageHeading p {
+    font-size: 10px;
+  }
+
+  .stageParticipantCount {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  .conferenceView {
+    grid-template-columns: repeat(auto-fit, minmax(min(155px, 100%), 1fr));
+    grid-auto-rows: minmax(150px, 1fr);
+    gap: 9px;
+  }
+
+  .singleParticipant {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .videoTile {
+    min-height: 150px;
+    border-radius: 12px;
+  }
+
+  .videoTile video {
+    min-height: 150px;
+  }
+
+  .videoNameTag {
+    left: 8px;
+    bottom: 8px;
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .meetingControls {
+    gap: 13px;
+    padding: 11px 13px;
+    margin-top: 10px;
+    border-radius: 15px;
+  }
+
+  .controlGroup {
+    gap: clamp(10px, 3vw, 20px);
+  }
+
+  .controlButton.MuiIconButton-root {
+    width: 43px;
+    height: 43px;
+  }
+
+  .controlButton.MuiIconButton-root svg {
+    font-size: 20px;
+  }
+
+  .controlItem {
+    gap: 5px;
+    font-size: 9px;
+  }
+
+  .endCallButton.MuiIconButton-root {
+    width: 46px;
+    height: 43px;
+  }
+
+  .controlSeparator {
+    height: 36px;
+  }
+
+  .chatRoom {
+    position: absolute;
+    z-index: 5;
+    top: 8px;
+    right: 12px;
+    bottom: 8px;
+    width: min(340px, calc(100% - 24px));
+    flex-basis: auto;
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 390px) {
+  .meetingHeader {
+    padding: 0 10px;
+  }
+
+  .meetingHeader .brand {
+    gap: 7px;
+    font-size: 15px;
+  }
+
+  .meetingDetails {
+    font-size: 9px;
+  }
+
+  .meetingWorkspace {
+    padding: 10px 8px;
+  }
+
+  .meetingControls {
+    gap: 9px;
+    padding: 9px 8px;
+  }
+
+  .controlGroup {
+    gap: 8px;
+  }
+
+  .controlButton.MuiIconButton-root {
+    width: 37px;
+    height: 37px;
+  }
+
+  .controlButton.MuiIconButton-root svg {
+    font-size: 17px;
+  }
+
+  .endCallButton.MuiIconButton-root {
+    width: 40px;
+    height: 37px;
+  }
+
+  .controlItem {
+    font-size: 8px;
+  }
+
+  .conferenceView {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .floatingNote {
+    right: 0;
+  }
+}
+
+/* =========================================================
+   GLOBAL MATERIAL UI INPUT VISIBILITY
+========================================================= */
+
+.appShell .MuiInputBase-root {
+  color: #fff !important;
+  caret-color: #b69aff !important;
+}
+
+.appShell .MuiInputBase-input {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  caret-color: #b69aff !important;
+  opacity: 1 !important;
+}
+
+.appShell .MuiInputBase-input::placeholder {
+  color: #bdb4d6 !important;
+  -webkit-text-fill-color: #bdb4d6 !important;
+  opacity: 1 !important;
+}
+
+.appShell .MuiOutlinedInput-root {
+  background-color: #211d3b;
+}
+
+.appShell .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(166, 139, 255, 0.4);
+}
+
+.appShell .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #a58aff !important;
+  border-width: 2px !important;
+}
+
+/* =========================================================
+   ACCESSIBILITY — REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .appShell *,
+  .appShell *::before,
+  .appShell *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
